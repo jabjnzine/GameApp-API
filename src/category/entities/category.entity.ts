@@ -7,13 +7,10 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 
-@Entity('games')
-export class Game {
+@Entity('categories')
+export class Category {
   @PrimaryGeneratedColumn()
   id: number;
-
-  @Column({ nullable: true })
-  category_id: number;
 
   @Column({ nullable: false })
   name: string;

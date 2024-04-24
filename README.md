@@ -34,6 +34,7 @@ npm install --save passport-local
 npm install --save @nestjs/passport passport
 npm install --save @nestjs/jwt passport-jwt
 npm install --save-dev @types/passport-jwt
+npm i nestjs-typeorm-paginate --save
 ```
 
 #### Command
@@ -53,6 +54,7 @@ npm i -D @types/bcrypt
 ```
 nest g resource user --no-spec
 nest g resource auth --no-spec
+nest g resource category --no-spec
 nest g resource games --no-spec
 
 
@@ -61,6 +63,7 @@ nest g resource games --no-spec
 ```
 npm run migration:generate -- db/migrations/users_create
 npm run migration:generate -- db/migrations/options_create
+npm run migration:generate -- db/migrations/categories_create
 npm run migration:generate -- db/migrations/games_create
 
 ```

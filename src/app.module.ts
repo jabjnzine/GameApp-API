@@ -7,6 +7,7 @@ import { dataSourceOptions } from 'db/data-source';
 import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
 import { GamesModule } from './games/games.module';
+import { CategoryModule } from './category/category.module';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { GamesModule } from './games/games.module';
     UserModule,
     AuthModule,
     GamesModule,
+    CategoryModule,
   ],
   controllers: [AppController],
   providers: [AppService],
