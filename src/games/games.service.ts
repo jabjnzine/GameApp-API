@@ -48,9 +48,9 @@ export class GamesService {
   }
 
   async findAll() {
-    const qb = this.gameRepository.createQueryBuilder('categories');
-    qb.orderBy('categories.name', 'ASC');
-    qb.where('categories.status = :status', { status: StatusType.ACTIVE });
+    const qb = this.gameRepository.createQueryBuilder('games');
+    qb.orderBy('games.name', 'ASC');
+    qb.where('games.status = :status', { status: StatusType.ACTIVE });
     return qb;
   }
 
