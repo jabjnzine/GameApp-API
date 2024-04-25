@@ -59,9 +59,9 @@ export class CategoryService {
   }
 
   async getOne(id: string): Promise<Category> {
-    const qb = this.categoryRepository.createQueryBuilder('pc');
+    const qb = this.categoryRepository.createQueryBuilder('cate');
     // qb.orderBy('pc.name', 'ASC');
-    qb.where('pc.id = :id', { id: id });
+    qb.where('cate.id = :id', { id: id });
     const result = await qb.getOne();
 
     if (!result) {

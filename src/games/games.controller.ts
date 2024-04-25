@@ -7,6 +7,11 @@ import {
   Param,
   Delete,
   UseInterceptors,
+  DefaultValuePipe,
+  Query,
+  ParseIntPipe,
+  UseGuards,
+  Request,
 } from '@nestjs/common';
 import { GamesService } from './games.service';
 import { CreateGameDto } from './dto/create-game.dto';
@@ -16,32 +21,44 @@ import {
   MemoryStorageFile,
   UploadedFiles,
 } from '@blazity/nest-file-fastify';
+import { JwtGuard } from 'src/auth/guards/jwt-auth.guard';
+import { Pagination } from 'nestjs-typeorm-paginate';
+import { ConfigApp } from 'src/config/config';
+import { Game } from './entities/game.entity';
 
 @Controller('games')
 export class GamesController {
   constructor(private readonly gamesService: GamesService) {}
-  @Post()
-  create(@Body() createGameDto: CreateGameDto) {
-    return this.gamesService.create(createGameDto);
+
+  @Get('')
+  findAll(
+    @Query('page', new DefaultValuePipe(1), ParseIntPipe) page: number = 1,
+    @Query('size', new DefaultValuePipe(ConfigApp.itemPerPage), ParseIntPipe)
+    limit: number = ConfigApp.itemPerPage,
+  ): Promise<Pagination<Game>> {
+    return this.gamesService.paginate({
+      page: page,
+      limit: limit,
+    });
   }
 
-  @Get()
-  findAll() {
-    return this.gamesService.findAll();
+  @Get('options')
+  getOptions(): Promise<Game[]> {
+    return this.gamesService.getOptions();
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.gamesService.findOne(+id);
+  @Post('')
+  create(@Body() createUserDto: CreateGameDto) {
+    return this.gamesService.create(createUserDto);
   }
 
+  @UseGuards(JwtGuard)
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateGameDto: UpdateGameDto) {
-    return this.gamesService.update(+id, updateGameDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.gamesService.remove(+id);
+  update(
+    @Param('id') id: string,
+    @Body() updateUserDto: CreateGameDto,
+    @Request() req,
+  ) {
+    return this.gamesService.update(id, updateUserDto);
   }
 }
