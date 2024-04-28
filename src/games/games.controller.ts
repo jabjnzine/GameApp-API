@@ -52,6 +52,17 @@ export class GamesController {
     return this.gamesService.create(createUserDto);
   }
 
+  @Post('/uploads')
+  @UseInterceptors(FilesInterceptor('files', 5))
+  async uploads(
+    @UploadedFiles()
+    files: {
+      files?: MemoryStorageFile;
+    },
+  ): Promise<any> {
+    return await this.gamesService.uploads(files);
+  }
+
   @UseGuards(JwtGuard)
   @Patch(':id')
   update(

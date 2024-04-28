@@ -8,6 +8,7 @@ import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
 import { GamesModule } from './games/games.module';
 import { CategoryModule } from './category/category.module';
+import { AwsModule } from './aws/aws.module';
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import { CategoryModule } from './category/category.module';
     AuthModule,
     GamesModule,
     CategoryModule,
+    AwsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

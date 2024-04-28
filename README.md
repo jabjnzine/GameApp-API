@@ -35,6 +35,9 @@ npm install --save @nestjs/passport passport
 npm install --save @nestjs/jwt passport-jwt
 npm install --save-dev @types/passport-jwt
 npm i nestjs-typeorm-paginate --save
+npm i --save @nestjs/platform-fastify
+npm install @fastify/multipart @blazity/nest-file-fastify
+
 ```
 
 #### Command
