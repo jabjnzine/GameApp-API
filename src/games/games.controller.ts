@@ -42,14 +42,19 @@ export class GamesController {
     });
   }
 
+  @Get('cate/:id')
+  findByIdCategories(@Param('id') id: number): Promise<Game[]> {
+    return this.gamesService.findByIdCategories(id);
+  }
+
   @Get('options')
   getOptions(): Promise<Game[]> {
     return this.gamesService.getOptions();
   }
 
   @Post('')
-  create(@Body() createUserDto: CreateGameDto) {
-    return this.gamesService.create(createUserDto);
+  create(@Body() createGame: CreateGameDto) {
+    return this.gamesService.create(createGame);
   }
 
   @Post('/uploads')
@@ -61,6 +66,12 @@ export class GamesController {
     },
   ): Promise<any> {
     return await this.gamesService.uploads(files);
+  }
+
+  @UseGuards(JwtGuard)
+  @Patch('status/:id')
+  updateStatus(@Param('id') id: string, @Request() req) {
+    return this.gamesService.updateStatus(id);
   }
 
   @UseGuards(JwtGuard)

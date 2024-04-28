@@ -47,6 +47,21 @@ export class GamesService {
     });
   }
 
+  async updateStatus(id: string) {
+    const game = await this.getOne(id);
+
+    try {
+      const result = await this.gameRepository.update(game.id, {
+        status:
+          game.status === StatusType.ACTIVE
+            ? StatusType.INACTIVE
+            : StatusType.ACTIVE,
+      });
+      return result;
+    } catch (error) {
+      return error;
+    }
+  }
   async update(id: string, updateUserDto: UpdateGameDto) {
     const productCate = await this.getOne(id);
 
@@ -80,6 +95,18 @@ export class GamesService {
     qb.orderBy('games.name', 'ASC');
     qb.where('games.status = :status', { status: StatusType.ACTIVE });
     return qb;
+  }
+
+  async findByIdCategories(category_id: number) {
+    const qb = this.gameRepository.createQueryBuilder('games');
+    qb.orderBy('games.name', 'ASC');
+    // qb.where('games.status = :status', { status: StatusType.ACTIVE });
+    qb.andWhere('games.category_id = :category_id', { category_id });
+    const result = await qb.getMany();
+    result.map((item: any) => {
+      item.image = this.s3StorageService.urlBuilder(item.image);
+    });
+    return result;
   }
 
   async create(createDto: CreateCategoryDto): Promise<Category> {
