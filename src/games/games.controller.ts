@@ -30,7 +30,7 @@ import { Game } from './entities/game.entity';
 export class GamesController {
   constructor(private readonly gamesService: GamesService) {}
 
-  @Get('')
+  @Get()
   findAll(
     @Query('page', new DefaultValuePipe(1), ParseIntPipe) page: number = 1,
     @Query('size', new DefaultValuePipe(ConfigApp.itemPerPage), ParseIntPipe)

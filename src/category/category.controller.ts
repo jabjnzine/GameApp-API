@@ -29,7 +29,7 @@ import {
 export class CategoryController {
   constructor(private readonly categoryService: CategoryService) {}
 
-  @Get('')
+  @Get()
   findAll(
     @Query('page', new DefaultValuePipe(1), ParseIntPipe) page: number = 1,
     @Query('size', new DefaultValuePipe(ConfigApp.itemPerPage), ParseIntPipe)
