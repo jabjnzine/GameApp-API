@@ -103,7 +103,7 @@ export class CategoryService {
     Object.values(files).forEach(async (file) => {
       const uuid = uuidv4();
       const ext = memeTypes.extension(file.mimetype);
-      const filePath = `games/${uuid}.${ext}`;
+      const filePath = `category/${uuid}.${ext}`;
       filePaths.push({
         file_path: filePath,
         full_url: `${ConfigApp.aws_s3_url}/${filePath}`,

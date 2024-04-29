@@ -25,7 +25,7 @@ import {
   MemoryStorageFile,
   UploadedFiles,
 } from '@blazity/nest-file-fastify';
-@Controller('categories')
+@Controller('category')
 export class CategoryController {
   constructor(private readonly categoryService: CategoryService) {}
 
