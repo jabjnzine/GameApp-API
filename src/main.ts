@@ -25,12 +25,12 @@ async function bootstrap() {
   app.useGlobalPipes(
     new ValidationPipe({
       whitelist: true,
+      transform: true,
       forbidNonWhitelisted: true,
     }),
   );
   // await app.listen(port);
   await app.listen(ConfigApp.appPort, '0.0.0.0');
-
   console.log(`Server running on port: ${port}`);
 }
 bootstrap();
