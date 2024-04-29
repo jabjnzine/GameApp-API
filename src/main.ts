@@ -20,7 +20,6 @@ async function bootstrap() {
   );
 
   await app.register(multiPart);
-  app.enableCors();
   app.useGlobalPipes(
     new ValidationPipe({
       // whitelist: true,
@@ -28,6 +27,7 @@ async function bootstrap() {
       // forbidNonWhitelisted: true,
     }),
   );
+  app.enableCors();
   // await app.listen(port);
   await app.listen(ConfigApp.appPort, '0.0.0.0');
   console.log(`Server running on port: ${port}`);
