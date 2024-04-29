@@ -9,7 +9,6 @@ import { AuthModule } from './auth/auth.module';
 import { GamesModule } from './games/games.module';
 import { CategoryModule } from './category/category.module';
 import { AwsModule } from './aws/aws.module';
-import { CategoriesModule } from './categories/categories.module';
 
 @Module({
   imports: [
@@ -24,7 +23,6 @@ import { CategoriesModule } from './categories/categories.module';
     GamesModule,
     CategoryModule,
     AwsModule,
-    CategoriesModule,
   ],
   controllers: [AppController],
   providers: [AppService],
